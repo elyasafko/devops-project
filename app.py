@@ -8,7 +8,7 @@ APP_VERSION = "1.2"
 
 @app.route('/')
 def hello():
-    return "Hello World!"
+    return "Hello World! you can also check /health, /version, /info endpoints.", 200
 
 @app.route('/health')
 def health():
