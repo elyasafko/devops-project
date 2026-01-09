@@ -78,7 +78,7 @@ This creates a **fully automated pipeline** from code commit to a live running s
 
 ## CI/CD Pipeline (GitHub Actions)
 
-The pipeline is triggered on every `push` to the main branch in the repository.
+The pipeline is triggered on every `push` to the master branch in the repository.
 
 ### Pipeline Steps
 
