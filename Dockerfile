@@ -17,4 +17,4 @@ USER myuser
 EXPOSE 5000
 
 # The command to run the process
-CMD ["python", "app.py"]
+CMD ["python", "src/app.py"]
