@@ -45,13 +45,11 @@ jobs:
           script: |
             echo "Pulling new image..."
             docker pull ${{ secrets.DOCKER_USERNAME }}/devops-project:latest
-          
-            echo "Removing any existing container named webapp..."
-            docker ps -aq --filter "name=^webapp$" | xargs -r docker rm -f
-          
+
+            echo "Stopping old container..."
+            docker stop webapp || true
+            docker rm webapp || true
+
             echo "Starting new container..."
             docker run -d --restart unless-stopped --name webapp -p 80:5000 ${{ secrets.DOCKER_USERNAME }}/devops-project:latest
 #            docker run -d --name webapp -p 443:5000 ${{ secrets.DOCKER_USERNAME }}/devops-project:latest # For HTTPS
-
-            echo "Done. Running containers:"
-            docker ps
