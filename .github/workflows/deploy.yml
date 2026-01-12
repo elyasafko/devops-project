@@ -35,7 +35,7 @@ jobs:
           flake8 . --count --ignore=E501,W503 --max-complexity=10 --statistics
 
           # security analysis
-          bandit -r . || true
+          bandit -r . -x ./tests || true
 
       - name: Run tests
         env:
