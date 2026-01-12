@@ -22,7 +22,6 @@ jobs:
           pip install -r requirements.txt
           pip install pylint pytest black isort flake8 bandit
 
-      # check code quality and security
       - name: Code Quality & Security Checks
         run: |
           # check code quality and security
