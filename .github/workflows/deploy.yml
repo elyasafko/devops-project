@@ -20,7 +20,23 @@ jobs:
       - name: Install Dependencies
         run: |
           pip install -r requirements.txt
-          pip install pylint pytest
+          pip install pylint pytest black isort flake8 bandit
+
+      # check code quality and security
+      - name: Code Quality & Security Checks
+        run: |
+          # check code quality and security
+          isort . --check-only --profile black
+          
+          # code formatting check
+          black . --check
+          
+          # check code style
+          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+          flake8 . --count --ignore=E501,W503 --max-complexity=10 --statistics
+
+          # security analysis
+          bandit -r . || true
 
       - name: Run tests
         env:
@@ -54,5 +70,3 @@ jobs:
 
             echo "Starting new container..."
             docker run -d --restart on-failure:5 --name webapp -p 80:5000 ${{ secrets.DOCKER_USERNAME }}/devops-project:latest
-#            docker run -d --restart unless-stopped --name webapp -p 80:5000 ${{ secrets.DOCKER_USERNAME }}/devops-project:latest
-#            docker run -d --name webapp -p 443:5000 ${{ secrets.DOCKER_USERNAME }}/devops-project:latest # For HTTPS
