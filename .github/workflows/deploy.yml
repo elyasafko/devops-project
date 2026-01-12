@@ -53,5 +53,6 @@ jobs:
             docker rm webapp || true
 
             echo "Starting new container..."
-            docker run -d --restart unless-stopped --name webapp -p 80:5000 ${{ secrets.DOCKER_USERNAME }}/devops-project:latest
+            docker run -d --restart on-failure:5 --name webapp -p 80:5000 ${{ secrets.DOCKER_USERNAME }}/devops-project:latest
+#            docker run -d --restart unless-stopped --name webapp -p 80:5000 ${{ secrets.DOCKER_USERNAME }}/devops-project:latest
 #            docker run -d --name webapp -p 443:5000 ${{ secrets.DOCKER_USERNAME }}/devops-project:latest # For HTTPS
