@@ -25,16 +25,20 @@ jobs:
       - name: Code Quality & Security Checks
         run: |
           # check code quality and security
+          # sort and format imports
           isort . --check-only --profile black
           
           # code formatting check
+          # format code with black and check for any formatting issues (like missing newlines, line length, etc.)
           black . --check
           
           # check code style
+          # check for common errors and enforce coding standards (like indentation, variable naming, etc.)
           flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
           flake8 . --count --ignore=E501,W503 --max-complexity=10 --statistics
 
           # security analysis
+          # check for common security issues in the code (like hardcoded secrets, unsafe functions, etc.)
           bandit -r . -x ./tests || true
 
       - name: Run tests
